@@ -1,0 +1,8 @@
+Visiting node: A
+Visiting node: B
+Visiting node: D
+Backtracking from D to B
+Visiting node: E
+Visiting node: F
+Goal 'F' found!
+DFS Path from A to F: A -> B -> E -> F
