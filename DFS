@@ -1,0 +1,36 @@
+def dfs(graph, start, goal, visited=None, parent=None):
+if visited is None:
+visited = set()
+parent = {start: None}
+visited.add(start) # mark current node visited
+print(f"Visiting node: {start}")
+if start == goal:
+print(f"\nGoal '{goal}' found!")
+return True, parent
+for neighbor in graph[start]:
+if neighbor not in visited:
+parent[neighbor] = start
+found, parent = dfs(graph, neighbor, goal, visited, parent)
+if found:
+return True, parent # goal found, unwind immediately
+else:
+print(f" Backtracking from {neighbor} to {start}")
+return False, parent # dead end for this branch
+# Graph representation (same structure as the BFS example)
+graph = {
+'A': ['B', 'C'],
+'B': ['A', 'D', 'E'],
+'C': ['A', 'F'],
+'D': ['B'],
+'E': ['B', 'F'],
+'F': ['C', 'E']
+}
+found, parent = dfs(graph, 'A', 'F')
+if found:
+path = []
+node = 'F'
+while node is not None:
+path.append(node)
+node = parent[node]
+path.reverse()
+print("\nDFS Path from A to F:", " -> ".join(path))
